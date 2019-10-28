@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+  <title>Superhero Browser</title>
+</head>
+
+<body>
+   <div id="app">
+      <h1 class="siteTitle">Superhero Browser</h1>
+      <div id="inputWrapper">
+      <div class="inputWrapper">
+          Search for a superhero:  <input id="input" type="text" v-model="name" v-on:keyup.enter="getData"/>
+      </div><button v-on:click="getData">Submit</button>
+            
+        </div>
+        <div v-if="loading">
+          <p id="loading">Loading...</p>
+        </div>
+        <div class="superheroesWrapper" v-else>
+            <div v-if="error">
+                No hero with that name found
+            </div>
+            <div v-else v-for="hero in superheroes" class="superheroWrapper">
+              <p class="name">{{hero.name}}</p>
+              <img class="image" :src="hero.image.url" onerror="this.onerror=null; this.src='https://cdn4.iconfinder.com/data/icons/business-vol-4-2/100/Artboard_15-512.png'"/>
+              <div class="appearanceWrapper sectionWrapper">
+                  <p class="sectionTitle">Appearance</p>
+                  <p>Eye color: {{hero.appearance.eyeColor}}</p>
+                  <p>Gender: {{hero.appearance.gender}}</p>
+                  <p>Hair color: {{hero.appearance.hairColor}}</p>
+                  <p>Height: {{hero.appearance.height[0]}}</p>
+                  <p>Race: {{hero.appearance.race}}</p>
+                  <p>Weight: {{hero.appearance.weight[0]}}</p>
+              </div>
+              <div class="biographyWrapper sectionWrapper">
+                  <p class="sectionTitle">Biography</p>
+                  <p>Aliases:</p>
+                      <ul class="subSectionWrapper">
+                          <li v-for="alias in hero.biography.aliases">
+                              <p>{{alias}}</p>
+                          </li>
+                      </ul>
+                  <p>Alignment: {{hero.biography.alignment}}</p>
+                  <p>Alter Egos: {{hero.biography.alterEgos}}</p>
+                  <p>First Appearance: {{hero.biography.firstApperance}}</p>
+                  <p>Full Name: {{hero.biography.fullName}}</p>
+                  <p>Place of Birth: {{hero.biography.placeOfBirth}}</p>
+                  <p>Publisher: {{hero.biography.publisher}}</p>
+              </div>
+              <div class="connectionsWrapper sectionWrapper">
+                  <p class="sectionTitle">Connections</p>
+                  <p>Group Affiliations: {{hero.connections.groupAffiliation}}</p>
+                  <p>Relatives: {{hero.connections.relatives}}</p>
+              </div>
+              <div class="statsWrapper sectionWrapper">
+                  <p class="sectionTitle">Stats</p>
+                  <p>Combat: {{hero.powerstats.combat}}</p>
+                  <p>Durability: {{hero.powerstats.durability}}</p>
+                  <p>Intelligence: {{hero.powerstats.intelligence}}</p>
+                  <p>Power: {{hero.powerstats.power}}</p>
+                  <p>Speed: {{hero.powerstats.speed}}</p>
+                  <p>Strength: {{hero.powerstats.strength}}</p>
+              </div>
+              <div class="wordWrapper sectionWrapper">
+                  <p class="sectionTitle">Work</p>
+                  <p>Base: {{hero.work.base}}</p>
+                  <p>Occupation: {{hero.work.ocupation}}</p>
+              </div>
+            </div>
+        </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="script.js"></script>
+</body>
+<footer>
+  <span class="footerText">Github URL: <a class="footerURL" href="https://github.com/BYUCS260/lab-3-vue-mcsederberg">https://github.com/BYUCS260/lab-3-vue-mcsederberg</a></span>
+</footer>
+
+</html>
